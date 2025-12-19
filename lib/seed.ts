@@ -1,52 +1,47 @@
-import 'dotenv/config';
 import db from './db';
-//import { users, posts } from './schema';
+import { categories, projects } from './schema';
 
 async function main() {
-  console.log('Starting database seed...');
+  console.log('🌱 Seeding database...');
 
-  try {
-    // Example seed data - modify according to your needs
-    //console.log('Seeding users...');
-    //   await db.insert(users).values([
-    //     {
-    //       name: 'John Doe',
-    //       email: 'john@example.com',
-    //     },
-    //     {
-    //       name: 'Jane Smith',
-    //       email: 'jane@example.com',
-    //     },
-    //   ]);
+  // Create categories
+  const [webCategory] = await db.insert(categories).values({
+    name: 'Web Apps',
+    description: 'Modern web applications built with Next.js and Tailwind',
+  }).returning();
 
-    //   console.log('Seeding posts...');
-    //   await db.insert(posts).values([
-    //     {
-    //       title: 'Getting Started with Drizzle',
-    //       content: 'This is a post about getting started with Drizzle ORM.',
-    //       published: true,
-    //       authorId: 1,
-    //     },
-    //     {
-    //       title: 'Migrating from Prisma to Drizzle',
-    //       content: 'A guide on migrating from Prisma to Drizzle.',
-    //       published: false,
-    //       authorId: 2,
-    //     },
-    //   ]);
+  const [aiCategory] = await db.insert(categories).values({
+    name: 'AI & Automation',
+    description: 'Projects leveraging LLMs and automated workflows',
+  }).returning();
 
-    console.log('Database seed completed successfully!');
-  } catch (error) {
-    console.error('Error during seed:', error);
-    process.exit(1);
-  }
+  // Create projects
+  await db.insert(projects).values([
+    {
+      title: 'Project Management Tool',
+      description: 'A comprehensive task and project tracking system',
+      status: 'in-progress',
+      categoryId: webCategory.id,
+    },
+    {
+      title: 'Enterprise Portfolio',
+      description: 'High-performance portfolio for enterprise clients',
+      status: 'completed',
+      categoryId: webCategory.id,
+    },
+    {
+      title: 'AI Chatbot Assistant',
+      description: 'Intelligent chatbot for customer support automation',
+      status: 'planned',
+      categoryId: aiCategory.id,
+    },
+  ]);
+
+  console.log('✅ Seeding complete!');
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    process.exit(0);
-  }); 
+main().catch((error) => {
+  console.error('❌ Error seeding database:', error);
+  process.exit(1);
+});
+
