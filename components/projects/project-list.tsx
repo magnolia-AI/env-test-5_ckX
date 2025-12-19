@@ -17,7 +17,7 @@ export function ProjectList({ initialProjects }: { initialProjects: any[] }) {
       setProjects(projects.filter(p => p.id !== id))
       toast.success('Project deleted successfully')
     } else {
-      // @ts-ignore - Handle the error property safely
+      // @ts-ignore
       toast.error(result.error || 'Failed to delete project')
     }
   }
@@ -44,7 +44,7 @@ export function ProjectList({ initialProjects }: { initialProjects: any[] }) {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {projects.map((project) => (
-        <Card key={project.id} className="group hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden">
+        <Card key={project.id} className="group hover:shadow-lg transition-all duration-300 border-border/50 overflow-hidden text-card-foreground">
           <CardHeader className="pb-3">
             <div className="flex justify-between items-start">
               <Badge variant="outline" className={getStatusColor(project.status)}>

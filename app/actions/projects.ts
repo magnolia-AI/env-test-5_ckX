@@ -4,14 +4,7 @@ import db from '@/lib/db'
 import { projects, categories, type NewProject } from '@/lib/schema'
 import { revalidatePath } from 'next/cache'
 import { eq } from 'drizzle-orm'
-
-export type ActionResult<T = any> = {
-  success: true;
-  data: T;
-} | {
-  success: false;
-  error: string;
-};
+import { type ActionResult } from './types'
 
 // Programmatic actions
 export async function getProjects() {
