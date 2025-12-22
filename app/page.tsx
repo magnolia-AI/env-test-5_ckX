@@ -11,7 +11,7 @@ export default async function ProjectsPage() {
   ])
 
   return (
-    <className="min-h-screen bg-transparent">
+    <main className="min-h-screen bg-transparent">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -71,5 +71,6 @@ export default async function ProjectsPage() {
     </main>
   )
 }
+
 
 
