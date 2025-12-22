@@ -7,18 +7,17 @@ import { eq } from 'drizzle-orm'
 import { type ActionResult } from './types'
 
 // Programmatic actions
-export const getProjects = async () => {
-  // Intentional error for testing: referencing a non-existent table column
+export async function getProjects() {
   try {
     return await db.query.projects.findMany({
-      where: (projects, { eq }) => eq(projects.nonExistentColumn, 'test'),
       with: {
         category: true,
       },
       orderBy: (projects, { desc }) => [desc(projects.createdAt)],
     });
   } catch (error) {
-    throw error; // Rethrow to trigger the error boundary
+    console.error('Error fetching projects:', error);
+    return [];
   }
 }
 
@@ -78,5 +77,6 @@ export async function createProjectFormAction(prevState: any, formData: FormData
     return { error: 'Failed to add project' };
   }
 }
+
 
 
