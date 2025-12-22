@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import db from '@/lib/db'
 import { projects, categories, type NewProject } from '@/lib/schema'
