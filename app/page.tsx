@@ -8,7 +8,7 @@ export default async function ProjectsPage() {
   const [initialProjects, categories] = await Promise.all([
     getProjects(),
     getCategories(),
-  ])
+
 
   return (
     <main className="min-h-screen bg-transparent">
