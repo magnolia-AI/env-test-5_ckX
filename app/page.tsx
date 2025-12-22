@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
               Build something great
             </div>
             <h1 className="text-5xl font-extrabold tracking-tight">
-              Project Hub
+              test Hub
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
               Organize, track, and showcase your creative technical work in one powerful dashboard.
